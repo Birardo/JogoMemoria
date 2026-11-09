@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pokémon Memory Trio</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header class="header">
+    <h1 class="interactive-title" title="Clique para um efeito especial!">
+      <span class="title-poke">Poké</span><span class="title-mem">Memory</span>
+      <span class="title-sub">Trio Evolution</span>
+    </h1>
+    <div class="game-stats">
+      <div class="stat-box">
+        <span class="stat-label">Tentativas:</span>
+        <span id="attempts-count" class="stat-value">0</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-label">Trios Restantes:</span>
+        <span id="trios-remaining" class="stat-value">0</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-label">Dificuldade:</span>
+        <span id="current-difficulty-label" class="stat-value">Fácil (12)</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-container">
+    <nav class="controls-nav" aria-label="Controles do Jogo">
+      <button id="btn-play" class="btn btn-primary">
+        <span class="icon">▶</span> Jogar
+      </button>
+      <button id="btn-pokemon-select" class="btn btn-secondary">
+        <span class="icon">🐾</span> Escolher Pokémon <span id="selected-poke-badge" class="badge">0/2</span>
+      </button>
+      <button id="btn-difficulty-select" class="btn btn-secondary">
+        <span class="icon">⚙️</span> Dificuldade
+      </button>
+      <button id="btn-restart" class="btn btn-danger" disabled>
+        <span class="icon">🔄</span> Reiniciar
+      </button>
+    </nav>
+
+    <section id="game-board" class="game-board" aria-label="Tabuleiro do Jogo">
+      <div class="welcome-screen">
+        <h2>Pronto para a jornada?</h2>
+        <p>Selecione a dificuldade ou seus Pokémons favoritos e clique em <strong>Jogar</strong> para começar!</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal de Seleção de Dificuldade -->
+  <div id="modal-difficulty" class="modal-overlay hidden" role="dialog" aria-modal="true">
+    <div class="modal-content">
+      <button class="modal-close" data-close="modal-difficulty">&times;</button>
+      <h2>Escolher Dificuldade</h2>
+      <p class="modal-subtitle">Combine 3 cartas de cada linha evolutiva para pontuar.</p>
+      
+      <div class="difficulty-options">
+        <button class="diff-option-btn" data-cards="9" data-name="Fácil (9)">
+          <span class="diff-title">Fácil</span>
+          <span class="diff-detail">9 Cartas (3 Trios)</span>
+        </button>
+        <button class="diff-option-btn active" data-cards="12" data-name="Fácil (12)">
+          <span class="diff-title">Fácil</span>
+          <span class="diff-detail">12 Cartas (4 Trios)</span>
+        </button>
+        <button class="diff-option-btn" data-cards="18" data-name="Médio (18)">
+          <span class="diff-title">Médio</span>
+          <span class="diff-detail">18 Cartas (6 Trios)</span>
+        </button>
+        <button class="diff-option-btn" data-cards="33" data-name="Difícil (33)">
+          <span class="diff-title">Difícil</span>
+          <span class="diff-detail">33 Cartas (11 Trios)</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Escolha de Pokémons -->
+  <div id="modal-pokemon" class="modal-overlay hidden" role="dialog" aria-modal="true">
+    <div class="modal-content modal-large">
+      <button class="modal-close" data-close="modal-pokemon">&times;</button>
+      <h2>Escolher Pokémons Fixos</h2>
+      <p class="modal-subtitle">Selecione até 2 famílias evolutivas para garantir no jogo (pelo 1º estágio):</p>
+      
+      <div id="pokemon-selector-grid" class="pokemon-selector-grid">
+        <!-- Preenchido via JavaScript -->
+      </div>
+      
+      <div class="modal-footer">
+        <button id="btn-confirm-pokemon" class="btn btn-primary">Confirmar Seleção</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Fim de Jogo -->
+  <div id="modal-victory" class="modal-overlay hidden" role="dialog" aria-modal="true">
+    <div class="modal-content victory-content">
+      <div class="trophy-icon">🏆</div>
+      <h2 class="victory-title">Jogo Finalizado!</h2>
+      
+      <div class="victory-stats">
+        <p>Total de Tentativas: <strong id="final-attempts">0</strong></p>
+      </div>
+
+      <div id="bonus-message" class="bonus-message hidden">
+        🌟 Parabéns treinador, você realmente é um expert em Pokémon! 🌟
+      </div>
+
+      <div class="victory-actions">
+        <button id="btn-victory-restart" class="btn btn-primary">
+          <span class="icon">🔄</span> Reiniciar
+        </button>
+        <button id="btn-victory-exit" class="btn btn-secondary">
+          <span class="icon">🚪</span> Sair
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
